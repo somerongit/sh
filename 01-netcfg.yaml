@@ -1,0 +1,24 @@
+# /etc/netplan/
+network:
+ ethernets:
+   enp1s0:
+     addresses:
+       - 70.10.240.90/27
+     nameservers:
+       addresses: [8.8.8.8]
+     routes:
+       - to: default
+         via: 70.10.240.90
+     dhcp4: false
+  wifis:
+    wlx89h:
+      optional: true
+      access-points:
+        "wifi_router":
+            password: "sa97kjckfhsqeij9u"
+      addresses:
+        - 192.168.1.12/24
+      dhcp4: false
+
+  version: 2
+  renderer: networkd
