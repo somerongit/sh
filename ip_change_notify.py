@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import requests, datetime, smtplib, ssl
+import requests, datetime, smtplib, ssl, random
 
 port = 587
 smtp_server = "smtp.gmail.com"
@@ -8,7 +8,8 @@ sender_email = "change.me@offline.com"
 receiver_email = "someron_bakuli@world.com"
 password = "change_me"
 
-result = requests.get('http://api.ipify.org/')
+# result = requests.get('http://api.ipify.org/')
+result = requests.get(random.choice(['https://api.ipify.org/','https://ipinfo.io/ip','https://api.ipify.org/','https://ipinfo.io/ip']))
 message  = result.text
 old_ip = ""
 
