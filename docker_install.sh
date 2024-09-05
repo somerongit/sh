@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Docker Installation Started"
 echo "Pkg Update"
 apt update
