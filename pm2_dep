@@ -1,0 +1,80 @@
+// Node Installation //////////////////////////////////////////////////////////////////////
+sudo apt update
+
+/* Add the NodeSource LTS PPA:
+This command will download and execute a script that adds the NodeSource repository for the latest LTS version to your system's apt sources. */
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+
+// Installing Node
+sudo apt install nodejs
+
+// Validate Installation
+node -v
+npm -v
+
+// PM2 Set Up ////////////////////////////////////////////////////////////////////////////
+sudo npm install pm2@latest -g
+
+// Setup Dep env
+// Clone the repo
+// Install req. node modules 
+// Create ecosystem.config.js for PM2 deployment
+/*
+Sample File
+module.exports = {
+    apps: [
+        {
+            name: "CarSimulator",
+            script: "index.js", // Your application's entry file
+            instances: 1, // max Or a number like 2, 4 (for cluster mode)
+            exec_mode: "fork", // cluster Or "fork" for single instance
+            watch: true,
+            log_date_format: 'DD-MM-YYYY HH:mm',
+            output: "./log/car_simulator.log",
+            error: "./log/pm2/car_simulator_err.log",
+            merge_logs: true,
+            ignore_watch: [
+                "node_modules",
+                "logs"
+            ],
+            env: {
+                NODE_ENV: "production"
+            }
+        }
+    ]
+};
+
+OR for type module ===> ecosystem.config.cjs
+
+const config  = {
+    apps: [
+        {
+            name: "CarSimulator",
+            script: "index.js", // Your application's entry file
+            instances: 1, // max Or a number like 2, 4 (for cluster mode)
+            exec_mode: "fork", // cluster Or "fork" for single instance
+            watch: true,
+            log_date_format: 'DD-MM-YYYY HH:mm',
+            output: "./log/car_simulator.log",
+            error: "./log/pm2/car_simulator_err.log",
+            merge_logs: true,
+            ignore_watch: [
+                "node_modules",
+                "logs"
+            ],
+            env: {
+                NODE_ENV: "production"
+            }
+        }
+    ]
+};
+
+export default config;
+
+*/
+// Deploy using PM2
+cd /path/to/your/my-node-app
+pm2 start ecosystem.config.js --env production
+
+// Save the PM2 Config for persistance deployment
+pm2 save
