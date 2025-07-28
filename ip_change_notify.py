@@ -8,9 +8,15 @@ sender_email = "change.me@offline.com"
 receiver_email = "someron_bakuli@world.com"
 password = "change_me"
 
-# result = requests.get('http://api.ipify.org/')
-result = requests.get(random.choice(['https://api.ipify.org/','https://ipinfo.io/ip','https://api.ipify.org/','https://ipinfo.io/ip']))
-message  = result.text
+url = random.choice(['https://api.ipify.org/','https://ipinfo.io/ip','http://checkip.dyndns.org/'])
+
+result = requests.get(url)
+
+if url=='http://checkip.dyndns.org/':
+        message = result.text.split(": ")[1].split("<")[0]
+else:
+        message  = result.text
+
 old_ip = ""
 
 try:
